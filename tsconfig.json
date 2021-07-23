@@ -1,0 +1,32 @@
+{
+  "version": "2.0.2",
+  "compilerOptions": {
+      "lib": ["es5", "es2015.promise", "dom", "es2015"],
+      "target": "es2015",
+      "baseUrl": ".",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "strict": true,
+      "outDir": "js",
+      "module": "es2020",
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "declaration": false,
+      "sourceMap": false,
+      "esModuleInterop": true,    
+      "resolveJsonModule": true,
+      "strictPropertyInitialization" : false,
+      "jsx": "react",
+      "reactNamespace": "JSX",
+      "allowJs" : true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+      "node_modules"
+  ]
+}

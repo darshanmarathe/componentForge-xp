@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>TypeScript Web Component</title>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.css" crossorigin="anonymous" />
+
+<script>
+      let item;
+      function AddComponent(e) {
+        e.preventDefault();
+        item = document.createElement("manotr-timeline-lite");
+        item.innerHTML = "loading...";
+        item.setAttribute("keepgoing", true);
+        item.setAttribute("currentsouce", "bbc");
+        item.setAttribute("interval" , 5);
+        item.setAttribute("article", "https://api.mocki.io/v1/d36bf462");
+        console.log(item);
+        document.body.appendChild(item);
+      }
+
+    </script>
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+   
+  </head>
+  <body>
+    <h1>webcomponents</h1>
+      <!-- <div style="width:95%">
+ <h2>Simulating cnn</h2>
+        <manotr-timeline-lite
+        keepgoing="true"
+        debug="true"
+        chartOnly="false"
+        currentsouce="cnn"
+        interval="10"
+        article="d36bf462"
+        id="somechart">
+      Loading...
+      </manotr-timeline-lite> -->
+      <h2>Simulating Manotr</h2>
+
+<manotr-timeline-lite
+      keepgoing="true"
+      debug="true"
+      chartOnly="false"
+      currentsouce="manotr"
+      interval="10"
+      article="301252408"
+      id="somechart">
+    Loading...
+</manotr-timeline-lite>
+<!-- 
+<h2>Simulating Blog</h2>
+
+<manotr-timeline-lite
+      keepgoing="true"
+      debug="true"
+      chartOnly="false"
+      currentsouce="blog"
+      interval="10"
+      article="d36bf462"
+      id="somechart">
+    Loading...
+</manotr-timeline-lite>  -->
+
+      </div>
+    <button id="btnSave" class="btn btn-primary" onclick="AddComponent(event)">Add</button>
+    <script src="/node_modules/@webcomponents/custom-elements/src/native-shim.js"></script>
+    <script type="module" src="js/manotr-elements.js"></script>
+
+    <script>
+      var elem = document.getElementById('somechart');
+      elem.addEventListener('article_changed' , Handle_change);
+
+      function Handle_change(e) {
+        // console.log(e , "handlled")
+    
+      }
+
+
+    </script>
+  </body>
+</html>
