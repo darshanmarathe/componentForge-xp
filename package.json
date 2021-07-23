@@ -1,26 +1,22 @@
 {
-  "name": "timeline-wc2",
+  "name": "wcforge",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Webcomponet forge lib",
+  "main": "server.ts",
   "scripts": {
     "watch": "webpack --watch",
     "start:dev": "webpack-dev-server",
     "build": "webpack",
     "start": "webpack"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Darshan Marathe",
+  "license": "MIT",
   "dependencies": {
     "@types/core-js": "^2.5.4",
     "@webcomponents/custom-elements": "^1.4.3",
-    "apexcharts": "^3.22.2",
     "axios": "^0.21.0",
-    "chart.js": "^2.9.4",
-    "core-js": "^3.8.0",
     "deep-object-diff": "^1.1.0",
     "lit-html": "^1.3.0",
-    "moment": "^2.29.1",
     "nouislider": "^14.6.3"
   },
   "devDependencies": {
