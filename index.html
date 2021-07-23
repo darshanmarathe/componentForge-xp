@@ -19,14 +19,13 @@
 <body>
   <h1>webcomponents</h1>
   </div>
-  <ph-button id="btnClick" class="btn btn-success" value="ph button"></ph-button>
+  <ph-button id="btnClick" class="btn btn-success" count="3" value="ph button"></ph-button>
   
   <script type="module" src="js/wcforge.js"></script>
 
   <script>
     setTimeout(() => {
-      document.querySelector('#btnClick').value = 'Hello world';
-      document.querySelector('#btnClick').class = ''
+      //document.querySelector('#btnClick').count = 12;
     }, 3000);
 
   </script>

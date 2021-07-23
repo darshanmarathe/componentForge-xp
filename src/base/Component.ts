@@ -99,7 +99,8 @@ export abstract class Component extends HTMLElement {
   }
 
   async PreRender() {
-    render(html` ${this.Style()} ${this.Template()} `, this.root);
+    render(html`${this.Style()} 
+              ${this.Template()} `, this.root);
   }
 
 
