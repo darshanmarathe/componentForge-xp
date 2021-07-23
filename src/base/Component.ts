@@ -14,7 +14,6 @@ export abstract class Component extends HTMLElement {
   abstract Template(): TemplateResult;
 
   async BuildProps() {
-    debugger;
     let keys = this.getAttributeNames();
     if (keys.length === 0) return;
     let props: any = {};
@@ -116,12 +115,12 @@ export abstract class Component extends HTMLElement {
     this.BuildProps();
   }
 
-  fireEvent(_event: { type: string; value: any }) {
+  fireEvent(type: string, value: any , bubbles = true ,composed = true ) {
     this.dispatchEvent(
-      new CustomEvent(_event.type, {
-        detail: _event.value,
-        bubbles: true,
-        composed: true,
+      new CustomEvent(type, {
+        detail: value,
+        bubbles,
+        composed,
       })
     );
   }
@@ -150,16 +149,6 @@ function sealed(constructor: Function) {
  */
 export function Tag(tagName: string) {
   return (target: any) => {
-    // implement class decorator here, the class decorator
-    // will have access to the decorator arguments (filter)
-    // because they are  stored in a closure
-
     window.customElements.define(tagName, target);
   };
-}
-
-export function Html(content: string) {
-  return (target: any) => {
-    target._template = content;
-  }
 }
