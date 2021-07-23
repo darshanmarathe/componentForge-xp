@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TypeScript Web Component</title>
-    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.css" crossorigin="anonymous" />
 
-<script>
-      let item;
-      function AddComponent(e) {
-        
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>TypeScript Web Component</title>
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.css"
+    crossorigin="anonymous" />
 
-    </script>
-     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-   
-  </head>
-  <body>
-    <h1>webcomponents</h1>
-            </div>
-   <forge-button value="Forge button"></forge-button>
-            <button id="btnSave" class="btn btn-primary" onclick="AddComponent(event)">Add</button>
-    <script src="/node_modules/@webcomponents/custom-elements/src/native-shim.js"></script>
-    <script type="module" src="/js/wcforge.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="/node_modules/@webcomponents/custom-elements/src/native-shim.js"></script>
 
-    <script>
-      
+</head>
 
-    </script>
-  </body>
+<body>
+  <h1>webcomponents</h1>
+  </div>
+  <ph-button id="btnClick" class="btn btn-success" value="ph button"></ph-button>
+  
+  <script type="module" src="js/wcforge.js"></script>
+
+  <script>
+    setTimeout(() => {
+      document.querySelector('#btnClick').value = 'Hello world';
+      document.querySelector('#btnClick').class = ''
+    }, 3000);
+
+  </script>
+</body>
+
 </html>

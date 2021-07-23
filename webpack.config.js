@@ -47,5 +47,5 @@ module.exports = {
     open: true,
     liveReload: true,
   },
-  //devtool: "source-map",
+  devtool: "source-map",
 };

@@ -1,29 +1,26 @@
 import { html, TemplateResult } from "lit-html";
 import { Component, Tag } from "./../base/Component";
 
-Tag({
-    name : "forge-button",
-    template : html`<button>{props?.value}/button>`,
-    style : html`button { color : 'red' }`
-})
-class Button extends Component {
-    ComponentDidMount(): Promise<void> {
-        throw new Error("Method not implemented.");
+@Tag("ph-button")
+class PhButton extends Component {
+    async ComponentDidMount(): Promise<void> {
+        console.log('component did mount')
     }
-    ComponentDidReceiedProps(): Promise<void> {
-        throw new Error("Method not implemented.");
+    async ComponentDidReceiedProps(propName:string , oldValue:any , newvalue:any): Promise<void> {
+        console.log(propName, oldValue ,newvalue, "receivedProps")
     }
     Style(): TemplateResult {
-        throw new Error("Method not implemented.");
+        return html``;
     }
     Template(): TemplateResult {
-        throw new Error("Method not implemented.");
+        return html`<button class="${this.props["class"]}" id="${this.props.id}"> ${this.props.value} </button>`
     }
     
     
     constructor() {
         super();
+        console.log("Button init")
     }
 }
 
-export default Button
+export default PhButton

@@ -1,6 +1,5 @@
-import Button from './components/button'
-
+import PhButton from './components/button'
 
 export {
-    Button
+    PhButton
 }

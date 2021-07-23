@@ -9,11 +9,12 @@ export abstract class Component extends HTMLElement {
   root: ShadowRoot;
 
   abstract ComponentDidMount(): Promise<void>;
-  abstract ComponentDidReceiedProps(): Promise<void>;
+  abstract ComponentDidReceiedProps(propName:string , oldValue:any , newvalue:any): Promise<void>;
   abstract Style(): TemplateResult;
   abstract Template(): TemplateResult;
 
   async BuildProps() {
+    debugger;
     let keys = this.getAttributeNames();
     if (keys.length === 0) return;
     let props: any = {};
@@ -28,7 +29,6 @@ export abstract class Component extends HTMLElement {
     var _diff = diff(props, this.props);
     this.props = props;
     if (Object.keys(_diff).length === 0) return;
-    await this.ComponentDidReceiedProps();
     await this.PreRender();
   }
 
@@ -37,41 +37,65 @@ export abstract class Component extends HTMLElement {
       axios.get(url).then(response => {
         resolve(response);
       })
-      .catch(error => {
-        resolve(error);
-      })
-      .finally(() => {
-        this.Log(`GET Request finished for ${url}`)
-      });
+        .catch(error => {
+          resolve(error);
+        })
+        .finally(() => {
+          this.Log(`GET Request finished for ${url}`)
+        });
     });
   }
 
-  post(url: string , data : any) {
+  post(url: string, data: any) {
     return new Promise((resolve, reject) => {
-      axios.post(url, data, {headers :  {
-        'contentType': "application/x-www-form-urlencoded; charset=UTF-8"
-      }})
-      .then(function (response) {
-        resolve(response.data);
+      axios.post(url, data, {
+        headers: {
+          'contentType': "application/x-www-form-urlencoded; charset=UTF-8"
+        }
       })
-      .catch(function (error) {
-        reject(error);
-      })
-      .finally(() => {
-        this.Log(`POST Request finished for ${url} ${JSON.stringify(data)}`)
-      });
+        .then(function (response) {
+          resolve(response.data);
+        })
+        .catch(function (error) {
+          reject(error);
+        })
+        .finally(() => {
+          this.Log(`POST Request finished for ${url} ${JSON.stringify(data)}`)
+        });
     })
   }
   constructor() {
     super();
     this.root = this.attachShadow({ mode: "open" });
     this.BuildProps();
+    this.makeDynamicProps();
   }
 
-  setState(object: any, preRender = true, render: boolean = true) {
+  makeDynamicProps(){
+    if (this.props && Object.keys(this.props).length) {
+      // Loop through the observed attributes
+      Object.keys(this.props).forEach(attribute => {
+        // Dynamically define the property getter/setter
+        Object.defineProperty(this, attribute, {
+          get() { return this.getAttribute(attribute); },
+          set(attrValue) {
+            let oldValue = this.props[attribute];
+            if (attrValue) {
+              this.setAttribute(attribute, attrValue);
+              this.BuildProps();
+            } else {
+              this.removeAttribute(attribute);
+            }
+            this.ComponentDidReceiedProps(attribute , oldValue, attrValue); 
+          }
+        });
+      });
+  }
+}
+
+  setState(object: any, preRender = true) {
     this.state = Object.assign(this.state, object);
     if (preRender === true) this.PreRender();
-    if (render === true) this.ComponentDidMount();
   }
 
   async PreRender() {
@@ -84,7 +108,7 @@ export abstract class Component extends HTMLElement {
   }
 
   async connectedCallback() {
-    this.BuildProps();
+    await this.ComponentDidMount();
   }
 
   attributeChangedCallback(name: string, oldValue: any, newValue: any) {
@@ -119,22 +143,22 @@ function sealed(constructor: Function) {
   Object.seal(constructor.prototype);
 }
 
-export function Tag(obj: {name: string , template : TemplateResult , style : TemplateResult }) {
+
+/**
+ * @param  {string} tagName tag name
+ */
+export function Tag(tagName: string) {
   return (target: any) => {
     // implement class decorator here, the class decorator
     // will have access to the decorator arguments (filter)
     // because they are  stored in a closure
 
-    target._template = obj.template;
-    target._style = obj.style;
-  
-    window.customElements.define(obj.name, target);
+    window.customElements.define(tagName, target);
   };
 }
 
-export function Html(content:string){
-  return (target: any) =>
-  {
-      target._template = content;
+export function Html(content: string) {
+  return (target: any) => {
+    target._template = content;
   }
 }
