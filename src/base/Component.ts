@@ -115,7 +115,7 @@ export abstract class Component extends HTMLElement {
   }
   
   async disconnectedCallback() {
-    await this.ComponentDidMount
+    await this.ComponentWillUnmount();
   }
 
   attributeChangedCallback(name: string, oldValue: any, newValue: any) {

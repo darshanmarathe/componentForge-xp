@@ -3,7 +3,7 @@ import { Component, Tag } from "./../base/Component";
 
 @Tag("ph-button")
 class PhButton extends Component {
-    async\ ComponentWillUnmount(): Promise<void> {
+    async ComponentWillUnmount(): Promise<void> {
         
     }
     async ComponentDidMount(): Promise<void> {
