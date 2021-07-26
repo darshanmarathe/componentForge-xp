@@ -2,6 +2,9 @@ import { html, TemplateResult } from "lit-html";
 import { Component, Tag } from "./../base/Component";
 @Tag("ph-todolist")
 export default class TodoList extends Component {
+    async ComponentWillUnmount(): Promise<void> {
+        
+    }
 
     constructor() {
         super();

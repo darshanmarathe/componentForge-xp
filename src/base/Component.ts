@@ -9,6 +9,8 @@ export abstract class Component extends HTMLElement {
   root: ShadowRoot;
 
   abstract ComponentDidMount(): Promise<void>;
+  abstract ComponentWillUnmount(): Promise<void>;
+
   abstract ComponentDidReceiedProps(propName:string , oldValue:any , newvalue:any): Promise<void>;
   abstract Style(): TemplateResult;
   abstract Template(): TemplateResult;
@@ -64,6 +66,7 @@ export abstract class Component extends HTMLElement {
     })
   }
   constructor() {
+    
     super();
     this.root = this.attachShadow({ mode: "open" });
     this.BuildProps();
@@ -109,6 +112,10 @@ export abstract class Component extends HTMLElement {
 
   async connectedCallback() {
     await this.ComponentDidMount();
+  }
+  
+  async disconnectedCallback() {
+    await this.ComponentDidMount
   }
 
   attributeChangedCallback(name: string, oldValue: any, newValue: any) {
