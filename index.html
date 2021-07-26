@@ -19,19 +19,21 @@
 <body>
   <h1>webcomponents</h1>
   </div>
-  <ph-button id="btnClick" class="btn" count="3" value="ph button"></ph-button>
-  <ph-todoList id="myTodos"></ph-todoList>
+  <!-- <ph-button id="btnClick" class="btn" count="3" value="ph button"></ph-button>
+  <ph-todoList id="myTodos"></ph-todoList> -->
+
+  <ph-picuturetaker id="pic" debug="true"></ph-picuturetaker>
   <script type="module" src="js/wcforge.js"></script>
 
   <script>
 
-document.querySelector('#btnClick').addEventListener('onClick', Reset) ;
-    function Reset() {
-      setTimeout(() => {
-        document.querySelector('#btnClick').count = 12;
-      }, 3000);
+// document.querySelector('#btnClick').addEventListener('onClick', Reset) ;
+//     function Reset() {
+//       setTimeout(() => {
+//         document.querySelector('#btnClick').count = 12;
+//       }, 3000);
       
-    }
+//     }
 
   </script>
 </body>

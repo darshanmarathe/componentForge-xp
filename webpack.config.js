@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./src/index.ts",
+  entry: "./App.ts",
   context: path.resolve(__dirname),
   output: {
     path: path.resolve(__dirname, "js"),
