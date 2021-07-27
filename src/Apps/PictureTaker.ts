@@ -1,7 +1,7 @@
 import { html, TemplateResult } from "lit-html";
 import { Component, Tag } from "../base/component";
 
-//import Cropper from './ImageCrop'
+import Cropper from './ImageCrop'
 
 @Tag('ph-picuturetaker')
 class PictureTaker extends Component {
@@ -35,15 +35,27 @@ class PictureTaker extends Component {
 }
 
 #canvas {
-    border: 1px solid red
+  height: 290px;
+  width: 650px;
+  background-color: #ffffff;
+  cursor: default;
+  border: 1px solid black;
 }
-
-
+/*!
+ * Cropper.js v2.0.0-alpha.1
+ * https://fengyuanchen.github.io/cropperjs
+ *
+ * Copyright 2015-present Chen Fengyuan
+ * Released under the MIT license
+ *
+ * Date: 2019-11-09T12:02:20.544Z
+ */
 
 .cropper-container {
   direction: ltr;
   font-size: 0;
   line-height: 0;
+  overflow: hidden;
   position: relative;
   -ms-touch-action: none;
   touch-action: none;
@@ -56,7 +68,6 @@ class PictureTaker extends Component {
 .cropper-container img {
   display: block;
   height: 100%;
-  image-orientation: 0deg;
   max-height: none !important;
   max-width: none !important;
   min-height: 0 !important;
@@ -64,26 +75,19 @@ class PictureTaker extends Component {
   width: 100%;
 }
 
-.cropper-wrap-box,
 .cropper-canvas,
 .cropper-drag-box,
-.cropper-crop-box,
-.cropper-modal {
-  bottom: 0;
+.cropper-crop-box {
   left: 0;
   position: absolute;
-  right: 0;
   top: 0;
-}
-
-.cropper-wrap-box,
-.cropper-canvas {
-  overflow: hidden;
 }
 
 .cropper-drag-box {
   background-color: #fff;
+  bottom: 0;
   opacity: 0;
+  right: 0;
 }
 
 .cropper-modal {
@@ -92,7 +96,6 @@ class PictureTaker extends Component {
 }
 
 .cropper-view-box {
-  display: block;
   height: 100%;
   outline: 1px solid #39f;
   outline-color: rgba(51, 153, 255, 0.75);
@@ -102,7 +105,6 @@ class PictureTaker extends Component {
 
 .cropper-dashed {
   border: 0 dashed #eee;
-  display: block;
   opacity: 0.5;
   position: absolute;
 }
@@ -126,7 +128,6 @@ class PictureTaker extends Component {
 }
 
 .cropper-center {
-  display: block;
   height: 0;
   left: 50%;
   opacity: 0.75;
@@ -138,7 +139,7 @@ class PictureTaker extends Component {
 .cropper-center::before,
 .cropper-center::after {
   background-color: #eee;
-  content: ' ';
+  content: "";
   display: block;
   position: absolute;
 }
@@ -160,7 +161,6 @@ class PictureTaker extends Component {
 .cropper-face,
 .cropper-line,
 .cropper-point {
-  display: block;
   height: 100%;
   opacity: 0.1;
   position: absolute;
@@ -292,7 +292,7 @@ class PictureTaker extends Component {
 .cropper-point.point-se::before {
   background-color: #39f;
   bottom: -50%;
-  content: ' ';
+  content: "";
   display: block;
   height: 200%;
   opacity: 0;
@@ -349,8 +349,14 @@ class PictureTaker extends Component {
             const video : any = this.root.getElementById('video');
             // Trigger photo take
 	        context.drawImage(video, 0, 0, 300  , 250);
-          // this.Cropper = Cropper();
-          //   this.Cropper(canvas)
+          
+ 
+          this.Cropper = new Cropper(canvas , {
+            aspectRatio: 16 / 9,
+            dragMode: 'move'
+            })
+          this.Log(this.Cropper)
+          
         }}>Snap Photo</button>
         <button id="crop" @click=${(e:any) => { 
         console.log('cropping is not implemeted');
