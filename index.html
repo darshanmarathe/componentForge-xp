@@ -20,12 +20,22 @@
   <h1>webcomponents</h1>
   </div>
   <!-- <ph-button id="btnClick" class="btn" count="3" value="ph button"></ph-button>
-  <ph-todoList id="myTodos"></ph-todoList> -->
+   -->
+   <ph-todoList id="myTodos" ownerimg=""></ph-todoList>
+  <ph-picuturetaker id="pic"  debug="true"></ph-picuturetaker>
 
-  <ph-picuturetaker id="pic" debug="true"></ph-picuturetaker>
+<img  id="image" src="img"  />
+
   <script type="module" src="js/wcforge.js"></script>
 
   <script>
+
+document.querySelector('#pic').addEventListener('onCaptured' , (data) => {
+  
+  document.querySelector('#image').src = data.detail;
+  document.querySelector('#myTodos').ownerimg = data.detail;
+  console.log(data)
+})
 
 // document.querySelector('#btnClick').addEventListener('onClick', Reset) ;
 //     function Reset() {

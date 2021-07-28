@@ -13,8 +13,8 @@ export default class TodoList extends Component {
     async ComponentDidMount(): Promise<void> {
 
     }
-    async ComponentDidReceiedProps(propName: string, oldValue: any, newvalue: any): Promise<void> {
-
+    async ComponentDidReceiedProps(propName: string, oldValue: any, newValue: any): Promise<void> {
+console.log(propName , newValue)
     }
     Style(): TemplateResult {
         return html``
@@ -25,7 +25,7 @@ export default class TodoList extends Component {
     }
     Template(): TemplateResult {
         return html`
-        <h1>TodoList (${this.state.todos?.length})</h1>
+        <h1>TodoList (${this.state.todos?.length})</h1> <img src=${this.props.ownerimg} />
         <hr>
         <input type="text" placeholder="Enter todo..." @keyup="${(e: any) => {
                 if (e.key === "Enter") {
