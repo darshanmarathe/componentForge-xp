@@ -25,7 +25,8 @@ console.log(propName , newValue)
     }
     Template(): TemplateResult {
         return html`
-        <h1>TodoList (${this.state.todos?.length})</h1> <img src=${this.props.ownerimg} />
+        <h1>TodoList (${this.state.todos?.length})</h1> 
+        <img width="100" height="100" src=${this.props.ownerimg} />
         <hr>
         <input type="text" placeholder="Enter todo..." @keyup="${(e: any) => {
                 if (e.key === "Enter") {
