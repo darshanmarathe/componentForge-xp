@@ -81,11 +81,11 @@ export abstract class Component extends HTMLElement {
         Object.defineProperty(this, attribute, {
           get() { return this.getAttribute(attribute); },
           set(attrValue) {
-            console.log("set" , attrValue)
             let oldValue = this.props[attribute];
             if (attrValue) {
               this.setAttribute(attribute, attrValue);
-              this.BuildProps();
+              this.props[attribute] = attrValue
+              this.PreRender();
             } else {
               this.removeAttribute(attribute);
             }

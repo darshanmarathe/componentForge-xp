@@ -21,20 +21,34 @@
   </div>
   <!-- <ph-button id="btnClick" class="btn" count="3" value="ph button"></ph-button>
    -->
-   <ph-todoList id="myTodos" ownerimg=""></ph-todoList>
-  <ph-picuturetaker id="pic"  debug="true"></ph-picuturetaker>
+   <ph-todoList id="myTodos"   ownerimg=""></ph-todoList>
+   <ph-dyntable id="table" debug="true" data=""></ph-dyntable>
+   <ph-picuturetaker id="pic"  debug="true"></ph-picuturetaker>
+   <h2>Posts</h2>
+   <ph-dyntable id="posts" data debug="true" ></ph-dyntable>
 
 <img  id="image" src="img"  />
 
   <script type="module" src="js/wcforge.js"></script>
 
-  <script>
+
+<script>
+fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
+  .then((response) => response.json())
+  .then((json) => {
+    document.querySelector('#posts').data = json
+  });
+
 
 document.querySelector('#pic').addEventListener('onCaptured' , (data) => {
   
   document.querySelector('#image').src = data.detail;
   document.querySelector('#myTodos').ownerimg = data.detail;
   console.log(data)
+})
+
+document.querySelector('#myTodos').addEventListener('onTodosChanged' , data => {
+  document.querySelector('#table').data = data.detail;
 })
 
 // document.querySelector('#btnClick').addEventListener('onClick', Reset) ;

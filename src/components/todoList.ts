@@ -32,6 +32,7 @@ console.log(propName , newValue)
                 if (e.key === "Enter") {
                     this.setState({ todos: [...this.state.todos, CreateTodo(e.target.value)] })
                     e.target.value = '';
+                    this.fireEvent("onTodosChanged" , this.state.todos);
                 }
             }}" />
         <ul>
@@ -41,6 +42,7 @@ console.log(propName , newValue)
                         const filterdTodos = this.state.todos.filter((to: any) => {
                             return to.id != todo.id;
                         })
+                        this.fireEvent("onTodosChanged" , filterdTodos);
                         this.setState({ todos: filterdTodos })
                     }}>x</button>
                     <button @click=${() => {
@@ -52,6 +54,7 @@ console.log(propName , newValue)
 
                             return cTodo;
                         })
+                        this.fireEvent("onTodosChanged" , mappedTodo);
                         this.setState({ todos: mappedTodo })
                     }}>Y</button>
                     </li>
