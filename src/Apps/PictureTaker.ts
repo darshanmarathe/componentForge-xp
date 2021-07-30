@@ -3,6 +3,9 @@ import { Component, Tag } from "../base/component";
 
 @Tag('ph-picuturetaker')
 class PictureTaker extends Component {
+    async slotChnaged(event: any): Promise<void> {
+        console.log(event);
+    }
     Cropper: any;
     async ComponentDidMount(): Promise<void> {
         const video:any = this.root.getElementById('video');

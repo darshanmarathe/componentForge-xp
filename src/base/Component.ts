@@ -10,6 +10,7 @@ export abstract class Component extends HTMLElement {
 
   abstract ComponentDidMount(): Promise<void>;
   abstract ComponentWillUnmount(): Promise<void>;
+  abstract slotChnaged(event:any):Promise<void>;
 
   abstract ComponentDidReceiedProps(propName:string , oldValue:any , newvalue:any): Promise<void>;
   abstract Style(): TemplateResult;
@@ -71,6 +72,7 @@ export abstract class Component extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
     this.BuildProps();
     this.makeDynamicProps();
+    this.root.addEventListener('slotchange', this.slotChnaged); 
   }
 
   makeDynamicProps(){
