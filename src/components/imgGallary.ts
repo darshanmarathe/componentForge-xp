@@ -6,6 +6,7 @@ export default class ImgGallary  extends Component {
     async slotChnaged(event: any): Promise<void> {
         const slot = event.target;
         let items = slot.assignedElements();
+        console.log(this);
         items.forEach((element:HTMLElement, index: number) => {
             element.style.width = '100px';
             element.style.height = '100px'
@@ -14,9 +15,11 @@ export default class ImgGallary  extends Component {
                 "");
             }
             element.addEventListener('click' , ({target}) => {
-                const elem = target as Element;
+                debugger;
+                const elem = target as HTMLElement;
                 this.querySelector('#main')?.setAttribute("src", elem.getAttribute("src") || 
                 "");
+                this.fireEvent("imageSelected" , elem.getAttribute("src"));
             })
         });        
         console.log(slot.assignedElements()[0].querySelectorAll('.thumb').length);

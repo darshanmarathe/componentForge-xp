@@ -72,7 +72,10 @@ export abstract class Component extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
     this.BuildProps();
     this.makeDynamicProps();
-    this.root.addEventListener('slotchange', this.slotChnaged); 
+    this.slotChnaged.bind(this)
+    this.root.querySelector('slot')?.addEventListener('slotchange', (e:any) => {
+      this.slotChnaged(e)
+    }); 
   }
 
   makeDynamicProps(){
