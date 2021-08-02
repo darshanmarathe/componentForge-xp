@@ -11,13 +11,13 @@ export default class ImgGallary  extends Component {
             element.style.width = '100px';
             element.style.height = '100px'
             if(index ===0){
-                this.querySelector('#main')?.setAttribute("src", element.getAttribute("src") || 
+                this.root.querySelector('#main')?.setAttribute("src", element.getAttribute("src") || 
                 "");
             }
             element.addEventListener('click' , ({target}) => {
                 debugger;
                 const elem = target as HTMLElement;
-                this.querySelector('#main')?.setAttribute("src", elem.getAttribute("src") || 
+                this.root.querySelector('#main')?.setAttribute("src", elem.getAttribute("src") || 
                 "");
                 this.fireEvent("imageSelected" , elem.getAttribute("src"));
             })

@@ -60,16 +60,16 @@
 
 
 
-// document.querySelector('#pic').addEventListener('onCaptured' , (data) => {
-//   document.querySelector('#image').src = data.detail;
-//   document.querySelector('#myTodos').ownerimg = data.detail;
-//   const imgDiv = document.querySelector('#gal1');
-//   imgDiv.innerHTML =imgDiv.innerHTML + `<img style="width:100px;height:100px" src="${data.detail}" />` 
-// })
+document.querySelector('#pic').addEventListener('onCaptured' , (data) => {
+  // document.querySelector('#image').src = data.detail;
+  // document.querySelector('#myTodos').ownerimg = data.detail;
+  const imgDiv = document.querySelector('#gal1');
+  imgDiv.innerHTML =imgDiv.innerHTML + `<img style="width:100px;height:100px" src="${data.detail}" />` 
+})
 
-// document.querySelector('#myTodos').addEventListener('onTodosChanged' , data => {
-//   document.querySelector('#table').data = data.detail;
-// })
+document.querySelector('#myTodos').addEventListener('onTodosChanged' , data => {
+  // document.querySelector('#table').data = data.detail;
+})
 
   </script>
 
