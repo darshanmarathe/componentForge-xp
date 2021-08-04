@@ -1,6 +1,6 @@
 (function () {
     var bindings = document.querySelectorAll('bindings  binding')
-    function getObject(rootObject , str) {
+    function getFunc( str , rootObject = window) {
         let props = str.split('.')
         let currObj = rootObject;
 
@@ -9,6 +9,22 @@
         });
 
         return currObj
+    }
+
+    function setObject( str , value ,  rootObject) {
+        let props = str.split('.')
+        let currObj = rootObject;
+
+        const lastIndex =  (props.length -1)
+        const lastProp = props[lastIndex]
+        props.forEach((prop , i) => {
+            if(i == lastIndex) return;
+            currObj = currObj[prop]
+        });
+
+        console.log(currObj[lastProp])
+        currObj[lastProp] = value;
+        console.log(currObj[lastProp])
     }
     bindings.forEach(binding => {
 
@@ -32,26 +48,12 @@
 
 
             if (pipe != undefined && pipe.trim() != "") {
-                let func = getObject(window , pipe);
-                func(e);
+                let func = getFunc(pipe);
+                func(e , targetElement);
                 return;
             }
 
-            var [k1, k2, k3] = property.split(".")
-            switch (property.split(".").length) {
-                case 1:
-                    targetElement[k1] = (e.detail || e.target.value);
-                    break;
-                case 2:
-                    targetElement[k1][k2] = (e.detail || e.target.value);
-                    break;
-                case 3:
-                    targetElement[k1][k2][k3] = (e.detail || e.target.value);
-                    break;
-                default:
-                    break;
-            }
-
+            setObject(property ,  (e.detail || e.target.value)  , targetElement);    
         })
     })
 
