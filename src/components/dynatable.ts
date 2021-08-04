@@ -33,8 +33,8 @@ export default class DynTable extends Component {
         </style>`
     }
     Template(): TemplateResult {
-        if (!Array.isArray(this.props.data)) return html`<div> No Data found. </div>`
-        return html`<table>
+    if (!Array.isArray(this.props.data)) return html`<div> No Data found. </div>`
+    return html`<table>
     ${this.tHead()}
     ${this.tBody()}
 

@@ -13,6 +13,7 @@ export abstract class Component extends HTMLElement {
   abstract slotChnaged(event:any):Promise<void>;
 
   abstract ComponentDidReceiedProps(propName:string , oldValue:any , newvalue:any): Promise<void>;
+
   abstract Style(): TemplateResult;
   abstract Template(): TemplateResult;
 
