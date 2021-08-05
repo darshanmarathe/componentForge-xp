@@ -31,10 +31,10 @@ height: 10px;
   </div>
 
   <input type="range" name="" id="range" min="0" max="100" value="0">
-  <div id="rangeOut"></div>
+  <div style="background-repeat: round;" id="rangeOut"></div>
   <ph-todoList id="myTodos"   ownerimg=""></ph-todoList>
     <h2>Table</h2>
-   <ph-dyntable id="table" debug="true" data=""></ph-dyntable>
+   <ph-dyntable id="table" debug="true" data></ph-dyntable>
    <h2>Posts</h2>
    <ph-dyntable id="posts" data debug="true" ></ph-dyntable>
 
@@ -58,22 +58,27 @@ height: 10px;
 <span id="targeOut"></span>
 <bindings>
   <binding source="#pic" event="onCaptured" target="#image" property="src"  />
-  <!-- <binding source="#pic" event="onCaptured" target="#myTodos" property="ownerimg" /> 
-  <binding source="#sourceIn" event="keyup" target="#targeOut" property="innerHTML" />
- <binding source="#myTodos" event="onTodosChanged" target="#table" property="data" />
-  <binding source="#gal1" event="imageSelected" target="#myTodos"  property="ownerimg" />-->
-  <binding source="#range" event="input" target="#rangeOut"  property="innerText" targrtFormat="{0}%" /> 
+<binding source="#pic" event="onCaptured" target="#myTodos" property="ownerimg" /> 
+<binding source="#pic" event="onCaptured" target="#rangeOut" property="style.backgroundImage" targrtFormat='url("{0}")' />
+ <binding source="#pic" event="onCaptured" target="#gal1"
+ property="innerHTML" targrtFormat='+<img style="width:100px;height:100px;margin:2px" src="{0}" />' />
+<binding source="#myTodos" event="onTodosChanged" target="#table" property="data" object />
+
+ <binding source="#sourceIn" event="keyup" target="#targeOut" property="innerHTML" />
+
+<binding source="#gal1" event="imageSelected" target="#myTodos"  property="ownerimg" />
+<binding source="#gal1" event="imageSelected" target="#rangeOut"  property="style.backgroundImage" targrtFormat='url("{0}")' />
+
+<!--<binding source="#range" event="input" target="#rangeOut" pipe="console.log" /> 
+
+
+<binding source="#range" event="input" target="#rangeOut"  property="innerText" targrtFormat="{0}%" /> 
   <binding source="#range" event="input" target="#rangeOut"  property="style.width" targrtFormat="{0}%" />
-  <binding source="#range" event="input" target="#rangeOut"  property="style.height" targrtFormat="{0}vh" />
-  <binding source="#pic" event="onCaptured" target="#rangeOut" property="style.backgroundImage" targrtFormat='url("{0}")' />
+  <binding source="#range" event="input" target="#rangeOut"  property="style.height" targrtFormat="{0}vh" />  -->
 
 </bindings>
 <script>
 
-  function DoSomething(event , target) {
-    console.log(event , target ,"event was called....")
-    target.style. = event.target.value;
-  }
 // fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
 //   .then((response) => response.json())
 //   .then((json) => {
