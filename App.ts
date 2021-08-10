@@ -5,5 +5,6 @@ import DynTable from './src/components/dynatable'
 
 import ImgGallary from './src/components/imgGallary'
 
+import MultiItemSelector from "./src/components/multiItemSelector";
 
-export { PictureTaker , TodoList , DynTable , ImgGallary}
+export { PictureTaker , TodoList , DynTable , ImgGallary, MultiItemSelector}

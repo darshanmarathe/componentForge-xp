@@ -31,8 +31,6 @@ export abstract class Component extends HTMLElement {
     }
     var _diff = diff(props, this.props);
     this.props = props;
-    if (Object.keys(_diff).length === 0) return;
-    await this.PreRender();
   }
 
   get(url: string) {
@@ -71,12 +69,15 @@ export abstract class Component extends HTMLElement {
     
     super();
     this.root = this.attachShadow({ mode: "open" });
-    this.BuildProps();
     this.makeDynamicProps();
-    this.slotChnaged.bind(this)
+    this.Template.bind(this);
+    this.Style.bind(this);
+    this.BuildProps();
+    this.slotChnaged.bind(this);
     this.root.querySelector('slot')?.addEventListener('slotchange', (e:any) => {
       this.slotChnaged(e)
     }); 
+    this.PreRender();
   }
 
   makeDynamicProps(){
