@@ -1,4 +1,5 @@
 import { html, TemplateResult } from "lit-html";
+import {classMap} from 'lit-html/directives/class-map.js';
 import { Component, Tag } from "../base/Component";
 
 
@@ -15,10 +16,14 @@ export default class MultiItemSelector extends Component {
     }
     async ComponentDidReceiedProps(propName: string, oldValue: any, newvalue: any): Promise<void> {
         
+        console.log(propName , newvalue)
             switch (propName) {
                 case "selecteditems":
-                    debugger;
-                    this.setState({selectedItems : [...newvalue , ""]});
+                    if(parseInt(this.props.maxlength) > newvalue.length) {
+                        this.setState({selectedItems : [...newvalue , ""]});
+                    }else{
+                        this.setState({selectedItems : newvalue});
+                    }
                     break; 
                     
               
@@ -63,6 +68,10 @@ export default class MultiItemSelector extends Component {
                     text-align: center;
                 }
 
+                .invalid { 
+                    border: 2px solid red;
+                }
+
             </style>
         `
     }
@@ -87,17 +96,28 @@ export default class MultiItemSelector extends Component {
         return myArray;
     }
       
+    AlreadyIn(item:string):boolean {
+        return this.state.selectedItems.filter((str:string) => {
+          return  str == item;
+        }).length > 1;
+    }
 
     GetDropDown(data:any, index:number): TemplateResult {
+        let classes = { invalid: this.AlreadyIn(data)}
+    
+
             return html`<li>
-                <select  data-index="${index}" @change="${(e:any) => {
+                <select class=${classMap(classes)} data-index="${index}" @change="${(e:any) => {
                     const index = parseInt(e.target?.getAttribute('data-index'));
                     const value = e.target?.value; 
                     let {selectedItems }= this.state;
                     selectedItems[index] = value;
                    // this.setState({selectedItems ,isValid : this.IsUniq(selectedItems)});
                    this.setState({selectedItems :this.replaceUniq(selectedItems , data) ,
-                    isValid : this.IsUniq(selectedItems)});
+                   isValid : this.IsUniq(selectedItems)});
+                   if(this.state.isValid === true) {
+                        this.fireEvent("change" , this.state.selectedItems);
+                   }
 
             }}">
             <option value="">${this.props.placeholder}</option>
@@ -114,13 +134,15 @@ export default class MultiItemSelector extends Component {
                 e.preventDefault();
                 console.log(e.target.value)
                 if(this.state.selectedItems[index] === "") return;
-                    this.setState({selectedItems : [...this.state.selectedItems , ""]})
+                this.setState({selectedItems : [...this.state.selectedItems , ""]})
+                this.fireEvent("change" , this.state.selectedItems);
             }}">Add </button>` : 
             html`<button @click="${(e:any) => {
                 e.preventDefault();
                this.state.selectedItems.splice(index, 1);
                const newArray = this.state.selectedItems;
                 this.setState({selectedItems : newArray , isValid : this.IsUniq(newArray)})
+                this.fireEvent("change" , this.state.selectedItems);
             }}">X</button>`}
             </li>`
     }
@@ -132,25 +154,33 @@ export default class MultiItemSelector extends Component {
         else "column";
     }
     Template(): TemplateResult {
-        if(this.props.data == "" || this.props.selecteditems == "") return html``
+        if(this.props.data == "") return html``
         return html`
+        <div>
+            Max you can add ${this.props.maxlength}
+        <br>
         <ol class="multi-item-selector  ${this.Direction()}"> 
             
         ${this.state.selectedItems?.map((u:any , index :number) => {
             return  this.GetDropDown(u , index);
         })}
         </ol>
+        </div>
         <br>
+        <br>
+        <br>
+        <p>Selected items :
         [${this.state.selectedItems?.join(",")}] <br>
         isValid : ${this.state.isValid}
+        </p>
         `
     }
     constructor() {
         super()
         this.state = {
-            selectedItems : this.props.selectedItems || [""],
+            selectedItems : (this.props.selectedItems == "") ? [""] : this.props.selectedItems,
             isValid : true
         }
-        if(this.state.selectedItems[0] !== "") this.state.selectedItems.push("");
+        //if(this.state.selectedItems[0] !== "") this.state.selectedItems.push("");
     }
 }

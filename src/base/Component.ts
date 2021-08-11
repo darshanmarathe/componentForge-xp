@@ -72,10 +72,10 @@ export abstract class Component extends HTMLElement {
     this.Template.bind(this);
     this.Style.bind(this);
     this.slotChnaged.bind(this);
+    this.PreRender();
     this.root.querySelector('slot')?.addEventListener('slotchange', (e:any) => {
       this.slotChnaged(e)
     }); 
-    this.PreRender();
   }
 
   //make sure all props are in lower case
