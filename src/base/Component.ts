@@ -1,5 +1,4 @@
 import { html, render, TemplateResult } from "lit-html";
-import { diff } from "deep-object-diff";
 import axios from 'axios';
 @sealed
 export abstract class Component extends HTMLElement {
@@ -12,7 +11,7 @@ export abstract class Component extends HTMLElement {
   abstract ComponentWillUnmount(): Promise<void>;
   abstract slotChnaged(event:any):Promise<void>;
 
-  abstract ComponentDidReceiedProps(propName:string , oldValue:any , newvalue:any): Promise<void>;
+  abstract ComponentDidReceiedProps(propName:string , oldValue:any , newValue:any): Promise<void>;
 
   abstract Style(): TemplateResult;
   abstract Template(): TemplateResult;
@@ -29,7 +28,6 @@ export abstract class Component extends HTMLElement {
         props[key] = this.getAttribute(key);
       }
     }
-    var _diff = diff(props, this.props);
     this.props = props;
   }
 
@@ -69,10 +67,10 @@ export abstract class Component extends HTMLElement {
     
     super();
     this.root = this.attachShadow({ mode: "open" });
+    this.BuildProps();
     this.makeDynamicProps();
     this.Template.bind(this);
     this.Style.bind(this);
-    this.BuildProps();
     this.slotChnaged.bind(this);
     this.root.querySelector('slot')?.addEventListener('slotchange', (e:any) => {
       this.slotChnaged(e)
@@ -80,6 +78,7 @@ export abstract class Component extends HTMLElement {
     this.PreRender();
   }
 
+  //make sure all props are in lower case
   makeDynamicProps(){
     if (this.props && Object.keys(this.props).length) {
       // Loop through the observed attributes
@@ -88,6 +87,7 @@ export abstract class Component extends HTMLElement {
         Object.defineProperty(this, attribute, {
           get() { return this.getAttribute(attribute); },
           set(attrValue) {
+            console.log(attribute , attrValue);
             let oldValue = this.props[attribute];
             if (attrValue) {
               this.setAttribute(attribute, attrValue);
@@ -127,6 +127,7 @@ export abstract class Component extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, oldValue: any, newValue: any) {
+    console.log(name , "attribute changed")
     this.BuildProps();
   }
 

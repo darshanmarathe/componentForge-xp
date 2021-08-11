@@ -4,6 +4,8 @@ Hi!  ComponentForge is typescript based web component framework which will allow
 the idea as how reacts component class + lit-html + decorators had a baby and that's ComponentForge.
 
 
+
+
 # Basic Component
 
  
@@ -116,6 +118,10 @@ the idea as how reacts component class + lit-html + decorators had a baby and th
 ## Need help
 
 Need real help in building components may be integrating StoryBook give feedback
+
+## Todos
+  - Remove Diff
+  - Remove Axios add fetch
 
 ## Roadmap
 
