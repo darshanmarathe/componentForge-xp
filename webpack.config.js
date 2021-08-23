@@ -23,6 +23,28 @@ module.exports = {
         loader: "html-loader",
       },
       {
+        test: /\.scss$/,
+        use: [
+          'raw-loader',
+        //  'style-loader', // creates style nodes from JS strings
+          // {
+          //   loader: 'css-loader', // translates CSS into CommonJS
+          //   options: {
+          //     importLoaders: 1
+          //   }
+          // },
+          {
+            loader:'sass-loader',
+            options: { 
+              sassOptions:{
+                includePaths: [path.resolve(__dirname, 'node_modules')]
+              }
+            }
+          },
+          //'postcss-loader', // post process the compiled CSS
+        ]
+      },
+      {
         test: /\.css$/,
         use: [
           "style-loader",
@@ -38,7 +60,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".js" , ".css" , ".scss"],
   },
   devServer: {
     contentBase: path.join(__dirname, "."),

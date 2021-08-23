@@ -11,3 +11,5 @@ export {
     ImgGallary,
     MultiItemSelector
 }
+
+import styles from './styles.scss'; 

@@ -6,6 +6,7 @@ export abstract class Component extends HTMLElement {
   props: any = {};
   state: any = {};
   root: ShadowRoot;
+  cssStyle:any;
 
   abstract ComponentDidMount(): Promise<void>;
   abstract ComponentWillUnmount(): Promise<void>;
@@ -108,8 +109,8 @@ export abstract class Component extends HTMLElement {
     if (preRender === true) this.PreRender();
   }
 
-  async PreRender() {
-    render(html`${this.Style()} 
+  PreRender() {
+    render( html`${this.Style()} 
               ${this.Template()} `, this.root);
   }
 
@@ -168,3 +169,6 @@ export function Tag(tagName: string) {
     window.customElements.define(tagName, target);
   };
 }
+
+
+

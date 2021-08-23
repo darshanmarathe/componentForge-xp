@@ -7,4 +7,8 @@ import ImgGallary from './src/components/imgGallary'
 
 import MultiItemSelector from "./src/components/multiItemSelector";
 
+
+import  './src/styles.scss'; 
+
+
 export { PictureTaker , TodoList , DynTable , ImgGallary, MultiItemSelector}
