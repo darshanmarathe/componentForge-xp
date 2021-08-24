@@ -58,17 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const targrtFormat = binding.getAttribute('targrtFormat') || "{0}";
         const isObject = binding.hasAttribute('object');
 
-        const elemToBind = document.querySelector(source);
-        const targetElement = document.querySelector(target);
+        const elemToBind = document.querySelectorAll(source);
+        const targetElement = document.querySelectorAll(target);
         if (!(pipe != undefined && pipe.trim() != "")) {
-            if (elemToBind == null || targetElement == null) {
+            if (elemToBind.length === 0 || targetElement.length === 0) {
                 console.error("source element ", elemToBind, " or target element", targetElement, " not found")
                 return;
             }
 
         }
 
-        elemToBind.addEventListener(event, function (e) {
+    elemToBind.forEach((elem) => {
+        elem.addEventListener(event, function (e) {
 
             if (pipe != undefined && pipe.trim() != "") {
                 let func = getFunc(pipe);
@@ -79,9 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 func(e, targetElement);
                 return;
             }
-
-            setObject(property, (e.detail || e.target.value), targetElement, targrtFormat , isObject);
+            targetElement.forEach((telem) => {
+                setObject(property, (e.detail || e.target.value), telem , targrtFormat , isObject);
+            });
         })
+    });
     })
 
 
