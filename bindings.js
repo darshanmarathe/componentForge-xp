@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+debugger;
     var bindings = document.querySelectorAll('bindings  binding')
     if (!String.prototype.format) {
         String.prototype.format = function () {
@@ -22,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return currObj
     }
 
-    function setObject(str, value, rootObject, targetFormat, isObject) {
+    function setObject(str, value, rootObject, targetFormat, isObject,sourceproperty) {
+        debugger;
         let props = str.split('.')
         let currObj = rootObject;
 
@@ -32,8 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i == lastIndex) return;
             currObj = currObj[prop]
         });
-
-        debugger;
+        
+        if(sourceproperty  && sourceproperty !== ""){
+            value  = value.getAttribute(sourceproperty);      
+        }
         
         if (isObject)
         {
@@ -47,13 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
             currObj[lastProp] = targetFormat.format(value);
         
     }
-
+    debugger;
+   
     bindings.forEach(binding => {
 
         const source = binding.getAttribute('source');
         const event = binding.getAttribute('event');
         const target = binding.getAttribute('target');
         const property = binding.getAttribute('property');
+        const sourceproperty = binding.getAttribute('sourceproperty');
         const pipe = binding.getAttribute('pipe');
         const targrtFormat = binding.getAttribute('targrtFormat') || "{0}";
         const isObject = binding.hasAttribute('object');
@@ -69,6 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     elemToBind.forEach((elem) => {
+   debugger;
+   
         elem.addEventListener(event, function (e) {
 
             if (pipe != undefined && pipe.trim() != "") {
@@ -81,7 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             targetElement.forEach((telem) => {
-                setObject(property, (e.detail || e.target.value), telem , targrtFormat , isObject);
+                if (sourceproperty && sourceproperty !== "") {
+                    setObject(property, (e.target), telem , targrtFormat , isObject , sourceproperty);
+                }else{
+
+                setObject(property, (e.detail || e.target.value || e.target), telem , targrtFormat , isObject , sourceproperty);
+                }
             });
         })
     });
