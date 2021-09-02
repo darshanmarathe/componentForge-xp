@@ -12,4 +12,3 @@ export {
     MultiItemSelector
 }
 
-import styles from './styles.scss'; 

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-debugger;
+
     var bindings = document.querySelectorAll('bindings  binding')
     if (!String.prototype.format) {
         String.prototype.format = function () {
@@ -24,7 +24,6 @@ debugger;
     }
 
     function setObject(str, value, rootObject, targetFormat, isObject,sourceproperty) {
-        debugger;
         let props = str.split('.')
         let currObj = rootObject;
 
@@ -51,8 +50,7 @@ debugger;
             currObj[lastProp] = targetFormat.format(value);
         
     }
-    debugger;
-   
+   debugger;
     bindings.forEach(binding => {
 
         const source = binding.getAttribute('source');
@@ -75,7 +73,7 @@ debugger;
         }
 
     elemToBind.forEach((elem) => {
-   debugger;
+   
    
         elem.addEventListener(event, function (e) {
 
