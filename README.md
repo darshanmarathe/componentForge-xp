@@ -3,6 +3,7 @@
 
 
 ![Logo componentForge](logo.png "Logo componentForge")
+
 Hi!  ComponentForge is typescript based web component framework which will allow react developers to create quick fast web component 
 the idea as how reacts component class + lit-html + decorators had a baby and that's ComponentForge.
 
