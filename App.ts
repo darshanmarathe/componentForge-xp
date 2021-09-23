@@ -9,8 +9,17 @@ import MultiItemSelector from "./src/components/multiItemSelector";
 
 import { TabView, Tab , Panel } from "./src/components/TabsControls";
 
+
+import ImgSlider from "./src/components/ImgSlider";
+
 import  './src/styles.scss'; 
 
 
-export { PictureTaker , TodoList , DynTable , ImgGallary, MultiItemSelector
-,TabView, Tab , Panel}
+export { PictureTaker 
+    , TodoList 
+    , DynTable 
+    , ImgGallary,
+     MultiItemSelector
+    ,TabView, Tab , Panel
+    , ImgSlider
+}

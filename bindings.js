@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
             currObj[lastProp] = targetFormat.format(value);
         
     }
-   debugger;
     bindings.forEach(binding => {
 
         const source = binding.getAttribute('source');

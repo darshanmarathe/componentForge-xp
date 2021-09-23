@@ -49,10 +49,20 @@ lazy-image {
 </style>
 </head>
 <body>
-    <x-tabs-view>
+
+  <x-tabs-view>
         <x-tab role="heading" selected="true" slot="tab">Image</x-tab>
         <x-panel role="region"hidden="true" slot="panel">
-      
+          <img-slider loading="eager">
+          <img data-src="https://i.pinimg.com/originals/9a/be/5f/9abe5f0ad84b083a1a52dac183c7bc89.jpg" alt="kitten"  />
+          <img data-src="https://i.ytimg.com/vi/gUIJ-UkQsXI/maxresdefault.jpg" alt="kitten"  />
+          <img data-src="https://images.unsplash.com/photo-1591871937573-74dbba515c4c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80" alt="kitten"  />
+          <img data-src="https://i.pinimg.com/originals/7a/af/0f/7aaf0f1d48f57b7779c0fbcf103c2d0f.jpg" alt="kitten"  />
+          <img data-src="https://i.pinimg.com/736x/fa/5c/0a/fa5c0a171020251c2a7ad092542be066.jpg" alt="kitten"  />
+        
+        
+        </img-slider>
+       
         </x-panel>
         <x-tab role="heading"  selected="false" slot="tab">Gallary</x-tab>
         <x-panel role="region"  hidden="true" slot="panel">
@@ -61,7 +71,12 @@ lazy-image {
         <x-tab role="heading"  selected="false" slot="tab">Tab 3</x-tab>
         <x-panel role="region" hidden="true" slot="panel">Content 3</x-panel>
       </x-tabs-view>
-      <lazy-image id="img" src="image.jpg" alt="Lazy Image">
+
+      
+     
+
+
+      <!-- <lazy-image id="img" src="image.jpg" alt="Lazy Image">
       </lazy-image>
 
       <div>
@@ -70,13 +85,14 @@ lazy-image {
         <img src="https://i.pinimg.com/originals/7a/af/0f/7aaf0f1d48f57b7779c0fbcf103c2d0f.jpg" alt="kitten" class="thumbnail" />
         <img src="https://i.pinimg.com/originals/9a/be/5f/9abe5f0ad84b083a1a52dac183c7bc89.jpg" alt="kitten" class="thumbnail" />
         <img src="https://i.pinimg.com/736x/fa/5c/0a/fa5c0a171020251c2a7ad092542be066.jpg" alt="kitten" class="thumbnail" />
-    </div> 
+    </div>  -->
+
 
     <bindings>
-        <binding source=".thumbnail" target="#img" event="click" property="src" sourceproperty="src"></binding>
+        <!-- <binding source=".thumbnail" target="#img" event="click" property="src" sourceproperty="src"></binding>
         <binding source=".thumbnail:first-child" target="#img" event="load" property="src" sourceproperty="src"></binding>
        
-        
+         -->
       </bindings>
 
     <script src="bindings.js"></script>

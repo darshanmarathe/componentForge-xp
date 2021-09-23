@@ -76,6 +76,7 @@ export abstract class Component extends HTMLElement {
     this.PreRender();
     this.root.querySelector('slot')?.addEventListener('slotchange', (e:any) => {
       this.slotChnaged(e)
+      this.ComponentDidMount();
     }); 
   }
 
@@ -104,9 +105,10 @@ export abstract class Component extends HTMLElement {
   }
 }
 
-  setState(object: any, preRender = true) {
+  setState(object: any, preRender = true , callback:(() => void) = () =>{}) {
     this.state = Object.assign(this.state, object);
     if (preRender === true) this.PreRender();
+    callback();
   }
 
   PreRender() {
