@@ -1,5 +1,4 @@
 import { html, render, TemplateResult } from "lit-html";
-import axios from 'axios';
 @sealed
 export abstract class Component extends HTMLElement {
 
@@ -34,8 +33,9 @@ export abstract class Component extends HTMLElement {
 
   get(url: string) {
     return new Promise((resolve, reject) => {
-      axios.get(url).then(response => {
-        resolve(response);
+      fetch(url).then(async (response) => {
+        const res = response.json();
+        resolve(res);
       })
         .catch(error => {
           resolve(error);
@@ -46,24 +46,39 @@ export abstract class Component extends HTMLElement {
     });
   }
 
+
+   
   post(url: string, data: any) {
-    return new Promise((resolve, reject) => {
-      axios.post(url, data, {
-        headers: {
-          'contentType': "application/x-www-form-urlencoded; charset=UTF-8"
-        }
-      })
-        .then(function (response) {
-          resolve(response.data);
-        })
-        .catch(function (error) {
-          reject(error);
-        })
-        .finally(() => {
-          this.Log(`POST Request finished for ${url} ${JSON.stringify(data)}`)
+  
+    return new Promise(async (resolve, reject) => {
+    
+    try {
+        // Awaiting for fetch response and 
+        // defining method, headers and body  
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
-    })
+  
+        // Awaiting response.json()
+        const resData = await response.json();
+  
+        // Returning result data
+        resolve(resData);
+      }
+      catch(error) {
+          reject(error);
+      }
+      finally{
+          this.Log(`POST Request finished for ${url} ${JSON.stringify(data)}`)
+      }
+    });
   }
+
+  
   constructor() {
     
     super();
@@ -76,6 +91,7 @@ export abstract class Component extends HTMLElement {
     this.PreRender();
     this.root.querySelector('slot')?.addEventListener('slotchange', (e:any) => {
       this.slotChnaged(e)
+      this.ComponentDidMount();
     }); 
   }
 
@@ -104,9 +120,10 @@ export abstract class Component extends HTMLElement {
   }
 }
 
-  setState(object: any, preRender = true) {
+  setState(object: any, preRender = true , callback:(() => void) = () =>{}) {
     this.state = Object.assign(this.state, object);
     if (preRender === true) this.PreRender();
+    callback();
   }
 
   PreRender() {
