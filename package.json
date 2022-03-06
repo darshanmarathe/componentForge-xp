@@ -1,7 +1,7 @@
 {
-  "name": "wcforge",
+  "name": "componentForge",
   "version": "1.0.0",
-  "description": "Webcomponet forge lib",
+  "description": "Component Forge Web Component Framework",
   "main": "server.ts",
   "scripts": {
     "watch": "webpack --watch",
