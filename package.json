@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "webpack --watch",
     "start:dev": "webpack-dev-server",
-    "build": "webpack",
+    "build": "webpack -c ./webpack.framework.config.js",
+    "buildCmpt": "webpack",
     "start": "webpack"
   },
   "author": "Darshan Marathe",
@@ -22,6 +23,7 @@
     "cssnano": "^5.1.0",
     "html-loader": "^3.1.0",
     "node-sass": "^7.0.1",
+    "path": "^0.12.7",
     "postcss-loader": "^6.2.1",
     "raw-loader": "^4.0.2",
     "sass-loader": "^12.6.0",

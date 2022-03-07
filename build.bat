@@ -1,6 +1,2 @@
-IF not [%1]==[] (
-   start http-server -o -c-1
-) 
-call rimraf js 
-call rimraf dist
-call npr watch
+cls
+tsc .\src\base\ComponentForge.ts --target ES2017 --outDir .\lib\ --moduleResolution node --module esnext %*
